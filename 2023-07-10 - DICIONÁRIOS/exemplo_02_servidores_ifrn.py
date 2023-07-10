@@ -12,27 +12,23 @@ lstCabecalhos = list()
 lstCabecalhos.append(arq_input.readline()[:-1].split(';'))
 
 # Lendo as linhas de dados
-lstServidores = list()
+dictServidores = dict()
 while True:
     linha = arq_input.readline()[:-1]
     if not linha: break
     linha = linha.split(';')
-    lstServidores.append(linha)
+    dictServidores[linha[9]] = linha
 
 # Fechando o arquivo de input
 arq_input.close()
-
-# Mapeando as matrículas em uma lista
-lstMatriculas = list(map(lambda m:m[9], lstServidores))
 
 # Solicitando a matrícula ao usuário
 matricula = input('Digite a Matrícula: ')
 
 # Verificando se a matrícula consta na lista de matrículas
-if matricula in lstMatriculas:
-    pos = lstMatriculas.index(matricula)
-    print(f'Nome........: {lstServidores[pos][5]}')
-    print(f'Categoria...: {lstServidores[pos][0]}')
-    print(f'Campus......: {lstServidores[pos][11]}')
+if matricula in dictServidores.keys():
+    print(f'Nome........: {dictServidores[matricula][5]}')
+    print(f'Categoria...: {dictServidores[matricula][0]}')
+    print(f'Campus......: {dictServidores[matricula][11]}')
 else:
     print('Não Há Servidor Com Essa Matrícula...')
